@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this template
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.ujf-grenoble.fr/l3miage/medical"
+           xmlns:pa="http://www.ujf-grenoble.fr/l3miage/medical"
+           elementFormDefault="qualified">
+    
+    <xs:element name="patient" type="pa:Patient"/>
+    
+    <xs:complexType name="Patient">
+        <xs:sequence>
+            <xs:element name="nom" type="xs:string" minOccurs="1"/>
+            <xs:element name="prénom" type="xs:string" minOccurs="1"/>
+            <xs:element name="sexe" type="pa:Sexe" minOccurs="1"/>
+            <xs:element name="naissance" type="xs:date" minOccurs="1"/>
+            <xs:element name="numéro" type="pa:Numero" minOccurs="1"/>
+            <xs:element name="adresse" type="pa:Adresse" minOccurs="1"/>
+            <xs:element name="visite" type="pa:Visite" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:simpleType name="Sexe">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="M"/>
+          <xs:enumeration value="F"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="Numero">
+        <xs:restriction base="xs:long">
+            <xs:pattern value="\d{15}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:complexType name="Adresse">
+        <xs:sequence>
+            <xs:element name="rue" type="xs:string" minOccurs="1"/>
+            <xs:element name="codePostal" type="pa:CodePostal" minOccurs="1"/>
+            <xs:element name="ville" type="xs:string" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:simpleType name="CodePostal">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{5}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:complexType name="Visite">
+        <xs:sequence>
+            <xs:element name="intervenant" type="pa:Intervenant" minOccurs="1"/>
+            <xs:element name="acte" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="date" type="xs:date" use="required"/>
+    </xs:complexType>
+    
+    <xs:complexType name="Intervenant">
+        <xs:sequence>
+            <xs:element name="nom" type="xs:string" minOccurs="1"/>
+            <xs:element name="prénom" type="xs:string" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+
+</xs:schema>

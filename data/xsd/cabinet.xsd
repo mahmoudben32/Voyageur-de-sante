@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           targetNamespace="http://www.ujf-grenoble.fr/l3miage/medical"
+           xmlns:cab="http://www.ujf-grenoble.fr/l3miage/medical" >
+ 
+    <xs:element name="cabinet" type="cab:Cabinet">
+        <xs:keyref name="infExist" refer="cab:infRefUnique">
+            <xs:selector xpath="cab:patients/cab:patient/cab:visite"/>
+            <xs:field xpath="@intervenant"/>
+        </xs:keyref>
+    </xs:element>
+    <xs:complexType name="Cabinet">
+        <xs:sequence>
+            <xs:element type="xs:string" name="nom"/>
+            <xs:element type="cab:Adresse" name="adresse"/>
+            <xs:element type="cab:Infirmiers" name="infirmiers">
+                <xs:unique name="infRefUnique">
+                    <xs:selector xpath="cab:infirmier" />
+                    <xs:field xpath="@id" />
+                </xs:unique>
+            </xs:element>
+            <xs:element type="cab:Patients" name="patients"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Adresse">
+        <xs:sequence>
+            <xs:element type="cab:NumEt" name="étage" minOccurs="0"/>
+            <xs:element type="cab:NumRue" name="numéro" minOccurs="0"/>
+            <xs:element type="xs:string" name="rue"/>
+            <xs:element type="cab:CodePostal" name="codePostal"/>
+            <xs:element type="cab:NomPropre" name="ville"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="Infirmier">
+        <xs:sequence>
+            <xs:element type="cab:NomPropre" name="nom"/>
+            <xs:element type="cab:NomPropre" name="prénom"/>
+            <xs:element type="cab:Photo" name="photo"/>
+        </xs:sequence>
+        <xs:attribute type="cab:Id" name="id"/>
+    </xs:complexType>
+    <xs:complexType name="Infirmiers">
+        <xs:sequence>
+            <xs:element type="cab:Infirmier" name="infirmier" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Acte">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute type="cab:Id" name="id" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="Visite">
+        <xs:sequence>
+            <xs:element type="cab:Acte" name="acte" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute type="xs:date" name="date"/>
+        <xs:attribute type="cab:Id" name="intervenant" use="optional"/>
+    </xs:complexType>
+    <xs:complexType name="Patient">
+        <xs:sequence>
+            <xs:element type="cab:NomPropre" name="nom"/>
+            <xs:element type="cab:NomPropre" name="prénom"/>
+            <xs:element type="cab:Sexe" name="sexe"/>
+            <xs:element type="xs:date" name="naissance"/>
+            <xs:element type="cab:NumSecu" name="numéro"/>
+            <xs:element type="cab:Adresse" name="adresse"/>
+            <xs:element type="cab:Visite" name="visite"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Patients">
+        <xs:sequence>
+            <xs:element type="cab:Patient" name="patient" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="NumRue">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{1,5}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="NumEt">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{1,3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CodePostal">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{5}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="NomPropre">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z][A-Za-z\-' áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]*" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Id">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Photo">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="([/|.|\w|\s|-])*\.(jpg|jpeg|gif|png)" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Sexe">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[MFA]" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="NumSecu">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[12]\d\d[01]\d{11}" />
+        </xs:restriction>
+    </xs:simpleType>    
+</xs:schema>

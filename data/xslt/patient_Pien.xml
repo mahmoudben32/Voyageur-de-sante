@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><med:patient xmlns:act="http://www.ujf-grenoble.fr/l3miage/actes" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xmlns:med="http://www.ujf-grenoble.fr/l3miage/medical" xs:schemaLocation="http://www.ujf-grenoble.fr/l3miage/medical ../xsd/patient.xsd"><med:nom>Pien</med:nom><med:prénom>Oscare</med:prénom><med:sexe>F</med:sexe><med:naissance>1975-03-25</med:naissance><med:numéro>275037306569202</med:numéro><med:adresse><med:rue>rue Casimir Brenier</med:rue><med:codePostal>38000</med:codePostal><med:ville>Grenoble</med:ville></med:adresse><med:visite date="2015-12-08"><med:intervenant><med:nom/><med:prénom/></med:intervenant><med:acte> 
+            Prélèvement par ponction veineuse directe
+        </med:acte><med:acte>
+            Injection intraveineuse directe en série.
+        </med:acte></med:visite></med:patient>

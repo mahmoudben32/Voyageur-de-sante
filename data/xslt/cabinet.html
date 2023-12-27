@@ -1,0 +1,81 @@
+<html xmlns:act="http://www.ujf-grenoble.fr/l3miage/actes" xmlns:cab="http://www.ujf-grenoble.fr/l3miage/medical">
+    <head>
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Profil de Fr&eacute;chie</title>
+        <link href="../css/pageInfirmier.css" type="text/css" rel="stylesheet">
+        <script type="text/javascript" src="../js/facture.js"></script><script type="text/javascript">
+                    function openFacture(prenom, nom, actes) {
+                        var width  = 500;
+                        var height = 300;
+                        if(window.innerWidth) {
+                            var left = (window.innerWidth-width)/2;
+                            var top = (window.innerHeight-height)/2;
+                        }
+                        else {
+                            var left = (document.body.clientWidth-width)/2;
+                            var top = (document.body.clientHeight-height)/2;
+                        }
+                        var factureWindow = window.open('','facture','menubar=yes, scrollbars=yes, top='+top+', left='+left+', width='+width+', height='+height+'');
+                        var factureText = afficherFacture(prenom, nom, actes);
+                        factureWindow.document.write(factureText);
+                        }
+                </script>
+    </head>
+    <body>
+                        Bonjour Fr&eacute;chie,
+        <br>
+                        Aujourd'hui, vous avez 2 patients
+                
+        <br>
+        <ul>
+            <li>
+                            Nom : Al&eacute;cole&nbsp;Yvon
+                <br>
+                            Adresse : 6<sup>e</sup> &eacute;tage,
+        50&nbsp;avenue F&eacute;lix Viallet,
+        38031&nbsp;Grenoble
+                <ul>
+                    <li>
+                        <p> Visite du 2015-12-08</p>
+                        <ul>
+                            <li>
+            Injection sous-cutan&eacute;e.
+        </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <input type="button" value="Facture" onclick="
+                openFacture('Yvon',
+                            'Al&eacute;cole',
+                            '')
+            ">
+            <br>
+            <br>
+            <li>
+                            Nom : Orouge&nbsp;Elvire
+                <br>
+                            Adresse : &nbsp;Rond-Point de la Croix de Vie,
+        38700&nbsp;La Tronche
+                <ul>
+                    <li>
+                        <p> Visite du 2015-12-08</p>
+                        <ul>
+                            <li>
+            Pansement de br&ucirc;lure &eacute;tendue ou de plaie chimique ou thermique &eacute;tendue,
+            sur une surface sup&eacute;rieure &agrave; 5% de la surface corporelle.
+        </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <input type="button" value="Facture" onclick="
+                openFacture('Elvire',
+                            'Orouge',
+                            '')
+            ">
+            <br>
+            <br>
+        </ul>
+    </body>
+</html>
